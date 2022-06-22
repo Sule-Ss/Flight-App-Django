@@ -1,6 +1,7 @@
 from .base import *
 
-DEBUG = False
+# DEBUG = False
+DEBUG = True  # Lokalde denenmek istendiğinde True yapılmalı
 
 ALLOWED_HOSTS = ['*']
 
