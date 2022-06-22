@@ -8,5 +8,4 @@ def create_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
 
-    def ready(self):
-        import users.signals
+    
