@@ -42,24 +42,22 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
     def validate(self, data):
-        if data['password'] != data['password2']:
+        if data["password"] != data["password2"]:
             raise serializers.ValidationError(
-                {'password': 'Password did not match...'}
+                {"password": "Password didn't match...."}
             )
         return data
 
 
 class UserSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = User
         fields = (
-
-            'username',
-            'first_name',
-            'last_name',
-            'email',
-
+            "id",
+            "username",
+            "first_name",
+            "last_name",
+            "email"
         )
 
 
@@ -69,5 +67,5 @@ class CustomTokenSerializer(TokenSerializer):
     class Meta(TokenSerializer.Meta):
         fields = (
             "key",
-            "user",
+            "user"
         )
