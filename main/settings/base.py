@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-from decouple import config
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,14 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("SECRET_KEY")
-
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG")
-
-ALLOWED_HOSTS = []
-
+SECRET_KEY = config('SECRET_KEY')
 
 # Application definition
 
@@ -40,12 +33,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Third party apps;
+    # Third party apps: 
     'rest_framework',
-    'django_extensions',
     'drf_yasg',
-
-
 ]
 
 MIDDLEWARE = [
@@ -119,55 +109,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-#! LOGGER
-
-LOGGING = {
-    "version": 1,
-    # is set to True then all loggers from the default configuration will be disabled.
-    "disable_existing_loggers": True,
-    # Formatters describe the exact format of that text of a log record.
-    "formatters": {
-        "standard": {
-            "format": "[%(levelname)s] %(asctime)s %(name)s: %(message)s"
-        },
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
-    },
-    # The handler is the engine that determines what happens to each message in a logger.
-    # It describes a particular logging behavior, such as writing a message to the screen,
-    # to a file, or to a network socket.
-    "handlers": {
-        "console": {
-            "class": "logging.StreamHandler",
-            "formatter": "standard",
-            "level": "INFO",
-            "stream": "ext://sys.stdout",
-        },
-        'file': {
-            'class': 'logging.FileHandler',
-            "formatter": "verbose",
-            'filename': './debug.log',
-            'level': 'WARNING',
-        },
-    },
-    # A logger is the entry point into the logging system.
-    "loggers": {
-        "django": {
-            #! işlemi yapan logic i kuran yer:
-            "handlers": ["console", 'file'],
-            # log level describes the severity of the messages that the logger will handle.
-            "level": config("DJANGO_LOG_LEVEL", "INFO"),
-            'propagate': True,
-            # If False, this means that log messages written to django.request
-            # will not be handled by the django logger.
-        },
-    },
-}
