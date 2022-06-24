@@ -14,7 +14,9 @@ THIRD_PARTY_MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
-MIDDLEWARE += THIRD_PARTY_MIDDLEWARE
+# MIDDLEWARE += THIRD_PARTY_MIDDLEWARE
+
+MIDDLEWARE.insert(0, *THIRD_PARTY_MIDDLEWARE)
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
